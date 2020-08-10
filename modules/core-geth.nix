@@ -18,6 +18,48 @@ with lib;
         default = 1;
       };
 
+      resources = {
+        requests = mkOption {
+          description = "Resource requests configuration";
+          type = with types; nullOr (submodule ({name, config, ...}: {
+            options = {
+              cpu = mkOption {
+                description = "Requested CPU";
+                type = str;
+                default = "100m";
+              };
+
+              memory = mkOption {
+                description = "Requested memory";
+                type = str;
+                default = "100Mi";
+              };
+            };
+          }));
+          default = {};
+        };
+
+        limits = mkOption {
+          description = "Resource limits configuration";
+          type = with types; nullOr (submodule ({name, config, ...}: {
+            options = {
+              cpu = mkOption {
+                description = "CPU limit";
+                type = str;
+                default = "200m";
+              };
+
+              memory = mkOption {
+                description = "Memory limit";
+                type = str;
+                default = "200Mi";
+              };
+            };
+          }));
+          default = {};
+        };
+      };
+
       chain = mkOption {
         description = "Which eth chain to use";
         type = types.enum ["ethereum" "kovan" "ropsten" "classic"];
@@ -110,29 +152,33 @@ with lib;
       kubernetes.resources.statefulSets.core-geth = {
         metadata.name = name;
         metadata.labels.app = name;
+        
         spec = {
           selector.matchLabels.app = name;
           replicas = config.replicas;
           serviceName = name;
           podManagementPolicy = "Parallel";
           updateStrategy.type = "RollingUpdate";
+
           template = {
             metadata.labels.app = name;
+
             spec = {
               securityContext.fsGroup = 1000;
+              
               containers.ethmonitor = {
                 image = "gatehub/ethmonitor";
                 env.ETH_NODE_URL.value = "http://localhost:8545";
                 ports = [
                   { containerPort = 3000; }
                 ];
+
                 resources = {
-                  requests.cpu = "50m";
-                  requests.memory = "128Mi";
-                  limits.cpu = "100m";
-                  limits.memory = "128Mi";
+                  requests = mkIf (config.resources.requests != null) config.resources.requests;
+                  limits = mkIf (config.resources.limits != null) config.resources.limits;
                 };
               };
+
               containers.core-geth = {
                 image = config.image;
                 args = 
@@ -161,15 +207,18 @@ with lib;
                   limits.cpu = config.resources.cpu;
                   limits.memory = config.resources.memory;
                 };
+
                 volumeMounts = [{
                   name = "storage";
                   mountPath = "/root/.ethereum";
                 }];
+
                 ports = [
                   { containerPort = 8545; }
                   { containerPort = 8546; }
                   { containerPort = 30303; }
                 ];
+
                 readinessProbe = {
                   httpGet = {
                     path = "/";
@@ -178,12 +227,14 @@ with lib;
                   initialDelaySeconds = 30;
                   timeoutSeconds = 30;
                 };
+
                 securityContext.capabilities.add = ["NET_ADMIN"];
               };
             };
           };
           volumeClaimTemplates = [{
             metadata.name = "storage";
+
             spec = {
               accessModes = ["ReadWriteOnce"];
               resources.requests.storage = config.storage.size;
