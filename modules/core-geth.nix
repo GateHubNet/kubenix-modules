@@ -174,8 +174,10 @@ with lib;
                 ];
 
                 resources = {
-                  requests = mkIf (config.resources.requests != null) config.resources.requests;
-                  limits = mkIf (config.resources.limits != null) config.resources.limits;
+                  requests.cpu = "50m";
+                  requests.memory = "128Mi";
+                  limits.cpu = "100m";
+                  limits.memory = "128Mi";
                 };
               };
 
@@ -202,10 +204,8 @@ with lib;
                   ++ config.extraOptions;
 
                 resources = {
-                  requests.cpu = config.resources.cpu;
-                  requests.memory = config.resources.memory;
-                  limits.cpu = config.resources.cpu;
-                  limits.memory = config.resources.memory;
+                  requests = mkIf (config.resources.requests != null) config.resources.requests;
+                  limits = mkIf (config.resources.limits != null) config.resources.limits;
                 };
 
                 volumeMounts = [{
