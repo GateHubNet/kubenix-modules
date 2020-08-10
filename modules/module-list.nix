@@ -16,6 +16,7 @@
   ./zetcd.nix
   ./kibana.nix
   ./parity.nix
+  ./core-geth.nix
   ./openethereum.nix
   ./beehive.nix
   ./minio.nix
