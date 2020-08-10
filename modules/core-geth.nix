@@ -138,20 +138,20 @@ with lib;
                 args = 
                   (if config.chain == "ethereum" then [] else ["--${config.chain}"])
                   ++ [
-                    "--port 30303"
-                    "--maxpendpeers 32"
+                    "--port=30303"
+                    "--maxpendpeers=32"
                   ]
                   ++ (if config.http.enable then [
                     "--http"
-                    "--http.addr ${config.http.addr}"
-                    "--http.api ${concatStringsSep "," config.http.api}"
-                    "--http.corsdomain ${concatStringsSep "," config.http.corsdomain}"
-                    "--http.vhosts ${concatStringsSep "," config.http.vhosts}"
+                    "--http.addr=${config.http.addr}"
+                    "--http.api=${concatStringsSep "," config.http.api}"
+                    "--http.corsdomain=${concatStringsSep "," config.http.corsdomain}"
+                    "--http.vhosts=${concatStringsSep "," config.http.vhosts}"
                   ] else [])
                   ++ (if config.ws.enable then [
                     "--ws"
-                    "--ws.addr ${config.ws.addr}"
-                    "--ws.origins ${concatStringsSep "," config.ws.origins}"
+                    "--ws.addr=${config.ws.addr}"
+                    "--ws.origins=${concatStringsSep "," config.ws.origins}"
                   ] else [])
                   ++ config.extraOptions;
 
