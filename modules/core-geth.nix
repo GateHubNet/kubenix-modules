@@ -65,6 +65,12 @@ with lib;
         type = types.enum ["ethereum" "kovan" "ropsten" "classic"];
       };
 
+      syncmode = mkOption {
+        description = "Sync mode of the client";
+        type = types.enum ["fast" "full" "light"];
+        default = "fast";
+      };
+
       storage = {
         size = mkOption {
           description = "Node storage size";
