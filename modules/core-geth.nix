@@ -189,12 +189,12 @@ with lib;
 
               containers.core-geth = {
                 image = config.image;
-                args = 
-                  (if config.chain == "ethereum" then [] else ["--${config.chain}"])
-                  ++ [
+                args = [
                     "--port=30303"
                     "--maxpendpeers=32"
+                    "--syncmode=${config.syncmode}"
                   ]
+                  ++ (if config.chain == "ethereum" then [] else ["--${config.chain}"])
                   ++ (if config.http.enable then [
                     "--http"
                     "--http.addr=${config.http.addr}"
