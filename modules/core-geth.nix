@@ -18,6 +18,19 @@ with lib;
         default = 1;
       };
 
+      storage = {
+        size = mkOption {
+          description = "Node storage size";
+          type = types.str;
+        };
+
+        class = mkOption {
+          description = "Node storage class (should be ssd)";
+          default = null;
+          type = types.nullOr types.str;
+        };
+      };
+
       resources = {
         requests = mkOption {
           description = "Resource requests configuration";
@@ -69,20 +82,6 @@ with lib;
         description = "Sync mode of the client";
         type = types.enum ["fast" "full" "light"];
         default = "fast";
-      };
-
-      storage = {
-        size = mkOption {
-          description = "Node storage size";
-          default = if config.chain == "ethereum" then "200G" else "100G";
-          type = types.str;
-        };
-
-        class = mkOption {
-          description = "Node storage class (should be ssd)";
-          default = null;
-          type = types.nullOr types.str;
-        };
       };
 
       http = {
