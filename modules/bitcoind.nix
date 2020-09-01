@@ -39,7 +39,7 @@ in {
 
       # [rpc]
       # Authentication
-      rpcauth=${toString config.rpcAuth}      
+      rpcauth=${toString config.rpcAuth}
 
       [main]
       rpcport=8332
@@ -58,7 +58,6 @@ in {
       port=18333
       rpcallowip=0.0.0.0/0
       rpcbind=0.0.0.0
-      
     '';
   in {
     options = {
