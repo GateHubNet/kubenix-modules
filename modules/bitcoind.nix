@@ -30,10 +30,10 @@ in {
 
       # Log to console
       printtoconsole=1
-      
+
       # Index all the transactions
       txindex=1
-      
+
       # Enable replace By Fee
       walletrbf=1
 
