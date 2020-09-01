@@ -207,13 +207,13 @@ in {
               initContainers = [{
                 name = "copy-bitcoincashd-config";
                 image = "busybox";
-                command = ["sh" "-c" "cp /config/bitcoin.conf /home/bitcoin/.bitcoin/bitcoin.conf"];
+                command = ["sh" "-c" "cp /config/bitcoin.conf /bitcoin/.bitcoin/bitcoin.conf"];
                 volumeMounts = [{
                   name = "config";
                   mountPath = "/config";
                 } {
                   name = "data";
-                  mountPath = "/home/bitcoin/.bitcoin/";
+                  mountPath = "/bitcoin/.bitcoin/";
                 }];
               }];
               containers.bitcoincashd = {
@@ -221,7 +221,7 @@ in {
 
                 volumeMounts = [{
                   name = "data";
-                  mountPath = "/home/bitcoin/.bitcoin/";
+                  mountPath = "/bitcoin/.bitcoin/";
                 }];
 
                 resources.requests = {
