@@ -204,6 +204,7 @@ in {
           template = {
             metadata.labels.app = name;
             spec = {
+              securityContext.fsGroup = 1000;
               initContainers = [{
                 name = "copy-bitcoincashd-config";
                 image = "busybox";
