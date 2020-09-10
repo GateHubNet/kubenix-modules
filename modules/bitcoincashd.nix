@@ -108,6 +108,48 @@ in {
           default = if config.testnet || config.regtest then "30Gi" else "250Gi";
         };
       };
+
+      resources = {
+        requests = mkOption {
+          description = "Resource requests configuration";
+          type = with types; nullOr (submodule ({name, config, ...}: {
+            options = {
+              cpu = mkOption {
+                description = "Requested CPU";
+                type = str;
+                default = "100m";
+              };
+
+              memory = mkOption {
+                description = "Requested memory";
+                type = str;
+                default = "100Mi";
+              };
+            };
+          }));
+          default = {};
+        };
+
+        limits = mkOption {
+          description = "Resource limits configuration";
+          type = with types; nullOr (submodule ({name, config, ...}: {
+            options = {
+              cpu = mkOption {
+                description = "CPU limit";
+                type = str;
+                default = "200m";
+              };
+
+              memory = mkOption {
+                description = "Memory limit";
+                type = str;
+                default = "200Mi";
+              };
+            };
+          }));
+          default = {};
+        };
+      };
     };
 
     config = {
@@ -143,13 +185,9 @@ in {
                   mountPath = "/bitcoin/.bitcoin/";
                 }];
 
-                resources.requests = {
-                  cpu = "1000m";
-                  memory = "2048Mi";
-                };
-                resources.limits = {
-                  cpu = "1000m";
-                  memory = "2048Mi";
+                resources = {
+                  requests = mkIf (config.resources.requests != null) config.resources.requests;
+                  limits = mkIf (config.resources.limits != null) config.resources.limits;
                 };
 
                 ports = [{
