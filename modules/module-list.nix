@@ -2,6 +2,7 @@
   ./globals.nix
   ./bitcoind.nix
   ./bitcoincashd.nix
+  ./bitcoin-abc-bchn.nix
   ./dashd.nix
   ./litecoind.nix
   ./rabbitmq.nix
