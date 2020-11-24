@@ -9,7 +9,7 @@ with lib;
       image = mkOption {
         description = "Image to use for kube-state-metrics";
         type = types.str;
-        default = "quay.io/coreos/kube-state-metrics:v1.3.1";
+        default = "quay.io/coreos/kube-state-metrics:v1.9.7";
       };
     };
 
@@ -117,15 +117,19 @@ with lib;
             "namespaces"
             "endpoints"
             "secrets"
-            "confimaps"
+            "configmaps"
           ];
           verbs = ["list" "watch"];
         } {
-          apiGroups = ["extensions"];
+          apiGroups = [
+            "extensions"
+            "apps"
+          ];
           resources = [
             "daemonsets"
             "deployments"
             "replicasets"
+            "ingresses"
           ];
           verbs = ["list" "watch"];
         } {
@@ -139,6 +143,38 @@ with lib;
         } {
           apiGroups = [ "autoscaling" ];
           resources = [ "horizontalpodautoscalers" ];
+          verbs = [ "list" "watch" ];
+        } {
+          apiGroups = ["admissionregistration.k8s.io"];
+          resources = [
+            "mutatingwebhookconfigurations"
+            "validatingwebhookconfigurations"
+          ];
+          verbs = [ "list" "watch" ];
+        } {
+          apiGroups = ["storage.k8s.io"];
+          resources = [
+            "storageclasses"
+            "volumeattachments"
+          ];
+          verbs = [ "list" "watch" ];
+        } {
+          apiGroups = ["networking.k8s.io"];
+          resources = [
+            "networkpolicies"
+          ];
+          verbs = [ "list" "watch" ];
+        } {
+          apiGroups = ["policy"];
+          resources = [
+            "poddisruptionbudgets"
+          ];
+          verbs = [ "list" "watch" ];
+        } {
+          apiGroups = ["certificates.k8s.io"];
+          resources = [
+            "certificatesigningrequests"
+          ];
           verbs = [ "list" "watch" ];
         }];
       };
