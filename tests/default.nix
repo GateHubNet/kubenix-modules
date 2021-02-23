@@ -10,6 +10,7 @@ let
   };
 in {
   bitcoind = buildTest ./bitcoind.nix {};
+  bitcoin-core = buildTest ./bitcoin-core.nix {};
   bitcoincashd = buildTest ./bitcoincashd.nix {};
   bitcoin-cash-node = buildTest ./bitcoin-cash-node.nix {};
   dashd = buildTest ./dashd.nix {};

@@ -1,6 +1,7 @@
 [
   ./globals.nix
   ./bitcoind.nix
+  ./bitcoin-core.nix
   ./bitcoincashd.nix
   ./bitcoin-cash-node.nix
   ./dashd.nix

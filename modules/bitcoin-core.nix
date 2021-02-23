@@ -1,9 +1,3 @@
-##
-##
-## DELETE THIS FILE AFTER SUCCESSFUL BITCOIN CORE MIGRATION
-##
-##
-
 { config, lib, k8s, ... }:
 
 with k8s;
@@ -12,8 +6,8 @@ with lib;
 let
   b2s = value: if value then "1" else "0";
 in {
-  config.kubernetes.moduleDefinitions.bitcoind.module = {config, module, ...}: let
-    bitcoindConfig = ''
+  config.kubernetes.moduleDefinitions.bitcoin-core.module = {config, module, ...}: let
+    bitcoinConfig = ''
       ##
       ## bitcoin.conf configuration file. Lines beginning with # are comments.
       ##
@@ -70,7 +64,6 @@ in {
       image = mkOption {
         description = "Name of the bitcoind image to use";
         type = types.str;
-        default = "kylemanna/bitcoind";
       };
 
       replicas = mkOption {
@@ -192,7 +185,7 @@ in {
 
       kubernetes.resources.configMaps.bitcoind = {
         metadata.name = "${module.name}-config";
-        data."bitcoin.conf" = bitcoindConfig;
+        data."bitcoin.conf" = bitcoinConfig;
       };
 
       kubernetes.resources.services.bitcoind = {

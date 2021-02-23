@@ -1,3 +1,9 @@
+##
+##
+## DELETE THIS FILE AFTER SUCCESSFUL BITCOIN CASH NODE MIGRATION
+##
+##
+
 { config, lib, k8s, ... }:
 
 with k8s;
