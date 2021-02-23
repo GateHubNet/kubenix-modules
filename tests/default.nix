@@ -11,6 +11,7 @@ let
 in {
   bitcoind = buildTest ./bitcoind.nix {};
   bitcoincashd = buildTest ./bitcoincashd.nix {};
+  bitcoin-cash-node = buildTest ./bitcoin-cash-node.nix {};
   dashd = buildTest ./dashd.nix {};
   litecoind = buildTest ./litecoind.nix {};
   rabbitmq = buildTest ./rabbitmq.nix {};
