@@ -189,9 +189,52 @@ in {
         size = mkOption {
           description = "Storage size";
           type = types.str;
-          default = if config.testnet || config.regtest then "10Gi" else "50Gi";
+          default = if config.testnet || config.regtest then "20Gi" else "100Gi";
         };
       };
+
+      resources = {
+        requests = mkOption {
+          description = "Resource requests configuration";
+          type = with types; nullOr (submodule ({name, config, ...}: {
+            options = {
+              cpu = mkOption {
+                description = "Requested CPU";
+                type = str;
+                default = "1";
+              };
+
+              memory = mkOption {
+                description = "Requested memory";
+                type = str;
+                default = "2Gi";
+              };
+            };
+          }));
+          default = {};
+        };
+
+        limits = mkOption {
+          description = "Resource limits configuration";
+          type = with types; nullOr (submodule ({name, config, ...}: {
+            options = {
+              cpu = mkOption {
+                description = "CPU limit";
+                type = str;
+                default = "2";
+              };
+
+              memory = mkOption {
+                description = "Memory limit";
+                type = str;
+                default = "2Gi";
+              };
+            };
+          }));
+          default = {};
+        };
+      };
+    };
     };
 
     config = {
@@ -227,13 +270,9 @@ in {
                   mountPath = "/dash/.dashcore/";
                 }];
 
-                resources.requests = {
-                  cpu = "2000m";
-                  memory = "2048Mi";
-                };
-                resources.limits = {
-                  cpu = "2000m";
-                  memory = "2048Mi";
+                resources = {
+                  requests = mkIf (config.resources.requests != null) config.resources.requests;
+                  limits = mkIf (config.resources.limits != null) config.resources.limits;
                 };
                 
                 ports = [{
