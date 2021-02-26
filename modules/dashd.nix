@@ -235,7 +235,6 @@ in {
         };
       };
     };
-    };
 
     config = {
       kubernetes.resources.statefulSets.dashd = {
