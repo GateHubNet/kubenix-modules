@@ -138,6 +138,8 @@ in {
               containers.bitcoind = {
                 image = config.image;
 
+                args = ["-nosettings"];
+
                 volumeMounts = [{
                   name = "data";
                   mountPath = "/bitcoin/.bitcoin/";
