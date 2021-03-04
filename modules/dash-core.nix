@@ -184,7 +184,7 @@ in {
         size = mkOption {
           description = "Storage size";
           type = types.str;
-          default = if config.testnet || config.regtest then "20Gi" else "100Gi";
+          default = if config.testnet || config.regtest then "100Gi" else "200Gi";
         };
       };
 
