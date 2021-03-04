@@ -264,6 +264,8 @@ in {
               containers.dashd = {
                 image = config.image;
 
+                args = ["-nosettings"];
+
                 volumeMounts = [{
                   name = "data";
                   mountPath = "/dash/.dashcore/";
