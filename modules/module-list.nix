@@ -5,6 +5,7 @@
   ./bitcoincashd.nix
   ./bitcoin-cash-node.nix
   ./dashd.nix
+  ./dash-core.nix
   ./litecoind.nix
   ./rabbitmq.nix
   ./elasticsearch.nix

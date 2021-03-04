@@ -14,6 +14,7 @@ in {
   bitcoincashd = buildTest ./bitcoincashd.nix {};
   bitcoin-cash-node = buildTest ./bitcoin-cash-node.nix {};
   dashd = buildTest ./dashd.nix {};
+  dash-core = buildTest ./dash-core.nix {};
   litecoind = buildTest ./litecoind.nix {};
   rabbitmq = buildTest ./rabbitmq.nix {};
   elasticsearch = buildTest ./elasticsearch.nix {};
