@@ -6,7 +6,7 @@ with lib;
 let
   b2s = value: if value then "1" else "0";
 in {
-  config.kubernetes.moduleDefinitions.litecoind.module = {config, module, ...}: let
+  config.kubernetes.moduleDefinitions.litecoin-core.module = {config, module, ...}: let
     litecoindConfig = ''
       ##
       ## litecoind.conf configuration file. Lines beginning with # are comments.
@@ -145,7 +145,6 @@ in {
       image = mkOption {
         description = "Name of the litecoind image to use";
         type = types.str;
-        default = "uphold/litecoin-core";
       };
 
       replicas = mkOption {
@@ -187,7 +186,7 @@ in {
         size = mkOption {
           description = "Storage size";
           type = types.str;
-          default = if config.testnet || config.regtest then "30Gi" else "250Gi";
+          default = if config.testnet || config.regtest then "100Gi" else "250Gi";
         };
       };
     };

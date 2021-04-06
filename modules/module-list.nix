@@ -3,7 +3,7 @@
   ./bitcoin-core.nix
   ./bitcoin-cash-node.nix
   ./dash-core.nix
-  ./litecoind.nix
+  ./litecoin-core.nix
   ./rabbitmq.nix
   ./elasticsearch.nix
   ./elasticsearch-curator.nix

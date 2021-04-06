@@ -12,7 +12,7 @@ in {
   bitcoin-core = buildTest ./bitcoin-core.nix {};
   bitcoin-cash-node = buildTest ./bitcoin-cash-node.nix {};
   dash-core = buildTest ./dash-core.nix {};
-  litecoind = buildTest ./litecoind.nix {};
+  litecoin-core = buildTest ./litecoin-core.nix {};
   rabbitmq = buildTest ./rabbitmq.nix {};
   elasticsearch = buildTest ./elasticsearch.nix {};
   elasticsearch-curator = buildTest ./elasticsearch-curator.nix {};
