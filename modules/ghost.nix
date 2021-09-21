@@ -11,7 +11,7 @@ with k8s;
       image = mkOption {
         description = "Docker image to use";
         type = types.str;
-        default = "ghost:3-alpine";
+        default = "ghost:4-alpine";
       };
 
       replicas = mkOption {
