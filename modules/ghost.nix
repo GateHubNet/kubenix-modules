@@ -96,7 +96,7 @@ with k8s;
         size = mkOption {
           description = "Storage size";
           type = types.str;
-          default = "10Gi";
+          default = "20Gi";
         };
       };
     };
