@@ -4,8 +4,7 @@ with k8s;
 with lib;
 
 {
-  config.kubernetes.moduleDefinitions.songbirdd.module = {config, module, ...}: let
-  in {
+  config.kubernetes.moduleDefinitions.songbirdd.module = {config, module, ...}: {
     options = {
       image = mkOption {
         description = "Name of the songbirdd image to use";
