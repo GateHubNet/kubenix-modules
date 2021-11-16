@@ -13,6 +13,7 @@
   ./etcd-operator.nix
   ./etcd.nix
   ./rippled.nix
+  ./songbirdd.nix
   ./zetcd.nix
   ./kibana.nix
   ./parity.nix
