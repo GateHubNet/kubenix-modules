@@ -3,9 +3,7 @@
 with k8s;
 with lib;
 
-let
-  b2s = value: if value then "1" else "0";
-in {
+{
   config.kubernetes.moduleDefinitions.songbirdd.module = {config, module, ...}: let
   in {
     options = {
