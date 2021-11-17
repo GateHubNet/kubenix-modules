@@ -1,14 +1,13 @@
 { config, ... }:
 
 {
-  require = [./test.nix ../modules/rippled.nix];
+  require = [./test.nix ../modules/songbirdd.nix];
 
-  kubernetes.modules.rippled = {
+  kubernetes.modules.songbirdd = {
     module = "songbirdd";
     configuration = {
-      nodeSize = "tiny";
       storage.class = "ssd";
-      autovalidator.enable = true;
+      image = "imagelocation";
     };
   };
 }
