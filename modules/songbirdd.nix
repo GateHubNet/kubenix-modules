@@ -61,7 +61,7 @@ with lib;
                 };
 
                 ports = [{
-                  name = "NodePort";
+                  name = "nodeport";
                   containerPort = 9650;
                 }];
               };
