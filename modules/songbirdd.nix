@@ -84,7 +84,7 @@ with lib;
         spec = {
           selector.app = module.name;
           ports = [{
-            name = "NodePort";
+            name = "nodeport";
             port = 9650;
           }];
         };
