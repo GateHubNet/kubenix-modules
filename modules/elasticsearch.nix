@@ -11,7 +11,7 @@ in {
       image = mkOption {
         description = "Elasticsearch image to use";
         type = types.str;
-        default = "quay.io/pires/docker-elasticsearch-kubernetes:6.2.3";
+        default = "quay.io/pires/docker-elasticsearch-kubernetes:6.4.2";
       };
 
       name = mkOption {
@@ -172,7 +172,7 @@ in {
                     NODE_DATA.value = b2s (elem "data" cfg.roles);
                     NODE_INGEST.value = b2s (elem "ingest" cfg.roles);
                     HTTP_ENABLE.value = b2s (elem "client" cfg.roles);
-                    ES_JAVA_OPTS.value = "-Xms${toString (cfg.memory * 3 / 4)}m -Xmx${toString (cfg.memory * 3 / 4)}m";
+                    ES_JAVA_OPTS.value = "-Xms${toString (cfg.memory * 3 / 4)}m -Xmx${toString (cfg.memory * 3 / 4)}m -Dlog4j2.formatMsgNoLookups=true";
                     DISCOVERY_SERVICE.value = "${name}-discovery";
                     ES_PLUGINS_INSTALL.value = toString config.plugins;
                   };
