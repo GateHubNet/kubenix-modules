@@ -18,7 +18,7 @@ with lib;
       image = mkOption {
         description = "Name of the kibana image to use";
         type = types.str;
-        default = "docker.elastic.co/kibana/kibana-oss:6.2.3";
+        default = "docker.elastic.co/kibana/kibana-oss:6.8.22";
       };
 
       replicas = mkOption {
