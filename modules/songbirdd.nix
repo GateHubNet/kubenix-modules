@@ -48,7 +48,7 @@ with lib;
                 image = config.image;
                 volumeMounts = [{
                   name = "data";
-                  mountPath = "/go/src/app/flare/db/";
+                  mountPath = "/flare/db/";
                 }];
 
                 resources.requests = {
