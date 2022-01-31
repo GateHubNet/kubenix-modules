@@ -54,12 +54,12 @@ with lib;
                 }];
 
                 resources.requests = {
-                  cpu = "4000m";
+                  cpu = "1000m";
                   memory = "8Gi";
                 };
 
                 resources.limits = {
-                  cpu = "4000m";
+                  cpu = "1000m";
                   memory = "8Gi";
                 };
 
@@ -70,7 +70,7 @@ with lib;
 
                 livenessProbe = {
                   exec.command = ["sh" "-c" ''
-                    if [ "$(curl -s http://localhost:9650/ext/health | jq -r '.checks.network.message.connectedPeers')" != "21"]; then                                                                   │
+                    if [ $(curl -s http://localhost:9650/ext/health | jq -r '.checks.network.message.connectedPeers') != "21" ]; then                                                                   │
                     exit 1;
                     fi                             
                   ''];
@@ -82,7 +82,7 @@ with lib;
                 
                 readinessProbe = {
                   exec.command = ["sh" "-c" ''
-                    if [ "$(curl -s http://localhost:9650/ext/health | jq -r '.healthy')" != "true" ]; then
+                    if [ $(curl -s http://localhost:9650/ext/health | jq -r '.healthy') != "true" ]; then
                     exit 1;
                     fi
                   ''];
