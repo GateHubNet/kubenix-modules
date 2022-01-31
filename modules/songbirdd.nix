@@ -46,6 +46,8 @@ with lib;
             spec = {
               containers.songbirdd = {
                 image = config.image;
+                imagePullPolicy = "IfNotPresent";
+
                 volumeMounts = [{
                   name = "data";
                   mountPath = "/flare/db/";
@@ -55,6 +57,7 @@ with lib;
                   cpu = "4000m";
                   memory = "8Gi";
                 };
+
                 resources.limits = {
                   cpu = "4000m";
                   memory = "8Gi";
@@ -64,6 +67,29 @@ with lib;
                   name = "nodeport";
                   containerPort = 9650;
                 }];
+
+                livenessProbe = {
+                  exec.command = ["sh" "-c" ''
+                    if [ "$(curl -s http://localhost:9650/ext/health | jq -r '.checks.network.message.connectedPeers')" != "21"]; then                                                                   │
+                    exit 1;
+                    fi                             
+                  ''];
+                  initialDelaySeconds = 60;
+                  periodSeconds = 60;
+                  failureThreshold = 5;
+                  successThreshold = 1;
+                };
+                readinessProbe = {
+                  exec.command = ["sh" "-c" ''
+                    if [ "$(curl -s http://localhost:9650/ext/health | jq -r '.healthy')" != "true" ]; then
+                    exit 1;
+                    fi
+                  ''];
+                  initialDelaySeconds = 60;
+                  periodSeconds = 60;
+                  failureThreshold = 3;
+                  successThreshold = 1;
+                };
               };
             };
           };
