@@ -79,6 +79,7 @@ with lib;
                   failureThreshold = 5;
                   successThreshold = 1;
                 };
+                
                 readinessProbe = {
                   exec.command = ["sh" "-c" ''
                     if [ "$(curl -s http://localhost:9650/ext/health | jq -r '.healthy')" != "true" ]; then
