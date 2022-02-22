@@ -50,7 +50,7 @@ with lib;
 
                 volumeMounts = [{
                   name = "data";
-                  mountPath = "/flare/db/";
+                  mountPath = "/flare/.flare/db/";
                 }];
 
                 resources.requests = {
