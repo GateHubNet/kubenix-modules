@@ -78,7 +78,7 @@ with k8s;
       kubernetes.resources = (setAttrByPath config.resourcePath {
         initContainers = [{
           name = "${module.name}-vault-login";
-          image = "vault";
+          image = "vault:1.9.4";
           imagePullPolicy = "IfNotPresent";
           env = {
             VAULT_CACERT.value =
@@ -117,7 +117,7 @@ with k8s;
           };
 
           "${module.name}-token-renewer" = mkIf config.renewToken {
-            image = "vault";
+            image = "vault:1.9.4";
             imagePullPolicy = "IfNotPresent";
             command = ["sh" "-ec" ''
               export VAULT_TOKEN=$(cat /vault/token)
