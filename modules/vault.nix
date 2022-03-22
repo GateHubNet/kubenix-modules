@@ -11,7 +11,7 @@ with k8s;
       image = mkOption {
         description = "Vault image to use";
         type = types.str;
-        default = "vault:1.0.3";
+        default = "vault:1.9.4";
       };
 
       configuration = mkOption {
