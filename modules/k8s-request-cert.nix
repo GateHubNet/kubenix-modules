@@ -35,7 +35,7 @@ with k8s;
       kubernetes.resources = (setAttrByPath config.resourcePath {
         initContainers = [{
           name = "request-cert";
-          image = "cockroachdb/cockroach-k8s-request-cert:0.3";
+          image = "cockroachdb/cockroach-k8s-request-cert:0.4";
           imagePullPolicy = "IfNotPresent";
           command = ["/bin/ash" "-ecx" ''
             /request-cert \
