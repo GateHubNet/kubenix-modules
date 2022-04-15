@@ -54,4 +54,5 @@
   ./locust.nix
   ./ghost.nix
   ./projectsend.nix
+  ./ory/hydra.nix
 ] ++ import ./prometheus/module-list.nix

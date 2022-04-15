@@ -24,6 +24,7 @@ in {
   deployer = buildTest ./deployer.nix {};
   rippled = buildTest ./rippled.nix {};
   songbirdd = buildTest ./songbirdd.nix {};
+  hydra = buildTest ./ory/hydra.nix {};
   zetcd = buildTest ./zetcd.nix {};
   kibana = buildTest ./kibana.nix {};
   parity = buildTest ./parity.nix {};
