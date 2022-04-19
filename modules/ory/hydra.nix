@@ -192,19 +192,25 @@ with k8s;
                                 }];
 
                                 livenessProbe = {
-                                    httpGet = {
-                                        path = "/health/alive";
-                                        port = 4445;
-                                    };
+                                    exec.command = ["sh" "-c" ''
+                                    if [ $(curl -s http://localhost:4445/health/alive | jq -r '.status') -ne "ok" ]; then
+                                        exit 1;
+                                    fi
+                                    ''];
                                     initialDelaySeconds = 30;
                                     periodSeconds = 5;
                                 };
 
                                 readinessProbe = {
-                                    httpGet = {
-                                        path = "/health/ready";
-                                        port = 4445;
-                                    };
+                                    exec.command = ["sh" "-c" ''
+                                    if [ $(curl -s http://localhost:4445/health/ready | jq -r '.status') -ne "ok" ]; then
+                                        exit 1;
+                                    fi
+                                    ''];
+                                    initialDelaySeconds = 60;
+                                    periodSeconds = 60;
+                                    failureThreshold = 1;
+                                    successThreshold = 1;
                                 };
                             };
                         };
