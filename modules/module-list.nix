@@ -55,4 +55,5 @@
   ./ghost.nix
   ./projectsend.nix
   ./ory/hydra.nix
+  ./jaeger/jaeger.nix
 ] ++ import ./prometheus/module-list.nix
