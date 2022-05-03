@@ -179,10 +179,13 @@ ${config.extraConfig}
         type = types.lines;
         default =
           if !(config.testnet)
-          then builtins.readFile (builtins.fetchurl {
-            url = "https://ripple.com/validators.txt";
-            sha256 = "0lsnh7pclpxl627qlvjfqjac97z3glwjv9h08lqcr11bxb6rafdk";
-          })
+          then ''
+          [validator_list_sites]
+          http://vl.ripple.com
+
+          [validator_list_keys]
+          ED2677ABFFD1B33AC6FBC3062B71F1E8397C1505E1C42C64D11AD1B28FF73F4734
+          ''
           else ''
           [validator_list_sites]
           http://vl.altnet.rippletest.net
