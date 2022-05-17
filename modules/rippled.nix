@@ -24,6 +24,13 @@ port=5005
 protocol=http
 admin=127.0.0.1
 
+[path_search]
+7
+[path_search_max]
+10
+[path_search_fast]
+2
+
 [port_ws_public]
 ip=0.0.0.0
 port=5006
