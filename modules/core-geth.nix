@@ -75,7 +75,7 @@ with lib;
 
       chain = mkOption {
         description = "Which eth chain to use";
-        type = types.enum ["ethereum" "kovan" "ropsten" "classic", "goerli"];
+        type = types.enum ["ethereum" "kovan" "ropsten" "classic" "goerli"];
       };
 
       syncmode = mkOption {
