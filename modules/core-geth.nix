@@ -75,7 +75,7 @@ with lib;
 
       chain = mkOption {
         description = "Which eth chain to use";
-        type = types.enum ["ethereum" "kovan" "ropsten" "classic"];
+        type = types.enum ["ethereum" "kovan" "ropsten" "classic", "goerli"];
       };
 
       syncmode = mkOption {
@@ -92,7 +92,7 @@ with lib;
           type = types.str;
           default = "0.0.0.0";
         };
-        
+
         api = mkOption {
           description = "API's offered over the HTTP-RPC interface.";
           type = types.listOf types.str;
@@ -157,7 +157,7 @@ with lib;
       kubernetes.resources.statefulSets.core-geth = {
         metadata.name = name;
         metadata.labels.app = name;
-        
+
         spec = {
           selector.matchLabels.app = name;
           replicas = config.replicas;
@@ -170,7 +170,7 @@ with lib;
 
             spec = {
               securityContext.fsGroup = 1000;
-              
+
               containers.ethmonitor = {
                 image = "gatehub/ethmonitor";
                 env.ETH_NODE_URL.value = "http://localhost:8545";
