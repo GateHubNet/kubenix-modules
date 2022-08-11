@@ -70,7 +70,7 @@ with lib;
 
                 livenessProbe = {
                   exec.command = ["sh" "-c" ''
-                    if [ $(curl -s http://localhost:9650/ext/health | jq -r '.checks.network.message.connectedPeers') -lt "17" ]; then
+                    if [ $(curl -s http://localhost:9650/ext/health | jq -r '.checks.network.message.connectedPeers') -lt "5" ]; then
                     exit 1;
                     fi
                   ''];
