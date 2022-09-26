@@ -137,6 +137,24 @@ in {
       
       # Index all the transactions
       txindex=1
+
+      [main]
+      rpcport=9998
+      port=9999
+      rpcallowip=0.0.0.0/0
+      rpcbind=0.0.0.0
+
+      [test]
+      rpcport=9998
+      port=9999
+      rpcallowip=0.0.0.0/0
+      rpcbind=0.0.0.0
+
+      [regtest]
+      rpcport=9998
+      port=9999
+      rpcallowip=0.0.0.0/0
+      rpcbind=0.0.0.0
     '';
   in {
     options = {
