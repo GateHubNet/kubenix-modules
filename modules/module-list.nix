@@ -15,6 +15,7 @@
   ./rippled.nix
   ./songbirdd.nix
   ./coston-node.nix
+  ./flare-node.nix
   ./zetcd.nix
   ./kibana.nix
   ./parity.nix
