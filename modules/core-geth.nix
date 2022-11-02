@@ -9,7 +9,6 @@ with lib;
       image = mkOption {
         description = "Name of the image to use";
         type = types.str;
-        default = "etclabscore/core-geth:version-1.11.11";
       };
 
       replicas = mkOption {
@@ -80,8 +79,7 @@ with lib;
 
       syncmode = mkOption {
         description = "Sync mode of the client";
-        type = types.enum ["fast" "full" "light"];
-        default = "fast";
+        type = types.enum ["full" "light" "snap"];
       };
 
       http = {
