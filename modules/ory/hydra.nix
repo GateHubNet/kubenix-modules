@@ -169,7 +169,7 @@ with k8s;
 
                                 inherit env;
 
-                                command = [ "hydra" "serve" "all" ];
+                                command = [ "hydra" "serve" "all" "--dangerous-force-http" ];
 
                                 resources = {
                                     requests = {
