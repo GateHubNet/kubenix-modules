@@ -48,7 +48,7 @@ with lib;
       image = mkOption {
         description = "Docker image to use for prometheus";
         type = types.str;
-        default = "prom/prometheus:v2.2.1";
+        default = "prom/prometheus:v2.43.0";
       };
 
       replicas = mkOption {
