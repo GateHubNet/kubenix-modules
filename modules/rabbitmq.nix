@@ -37,7 +37,7 @@ with k8s;
       enabledPlugins = mkOption {
         description = "List of rabbitmq plugins";
         type = types.listOf types.str;
-        default = ["rabbitmq_management"];
+        default = ["rabbitmq_management", "rabbitmq_shovel", "rabbitmq_shovel_management"];
       };
 
       storage = {
