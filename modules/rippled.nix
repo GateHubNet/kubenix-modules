@@ -35,7 +35,7 @@ admin=127.0.0.1
 ip=0.0.0.0
 port=5006
 protocol=ws,wss
-admin=127.0.0.1
+admin=127.0.0.1,10.0.0.0/8
 
 [database_path]
 /data
