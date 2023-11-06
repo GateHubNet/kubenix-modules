@@ -39,6 +39,7 @@
   ./k8s-request-cert.nix
   ./selfsigned-cert-deployer.nix
   ./nginx-ingress.nix
+  ./external-dns.nix
   ./mongo.nix
   ./pritunl.nix
   ./cloud-sql-proxy.nix
