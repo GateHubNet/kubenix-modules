@@ -50,7 +50,7 @@ with lib;
 
                 volumeMounts = [{
                   name = "data";
-                  mountPath = "/go-flare/.avalanchego/db/";
+                  mountPath = "/app/db/";
                 }];
 
                 resources.requests = {
