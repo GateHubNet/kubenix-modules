@@ -16,6 +16,11 @@ with k8s;
     };
     in {
         options = {
+            image = mkOption  {
+                description = "Docker image to user";
+                type = types.str;
+            };
+            
             replicas = mkOption {
                 description = "Number of Rafiki replicas to run";
                 type = types.int;
@@ -70,7 +75,7 @@ with k8s;
                                 inherit env;
 
                                 ports = [
-                                    { containerPort = 3010; name = "http" }
+                                    { containerPort = 3010; name = "http"; }
                                 ];
 
                                 resources = {
