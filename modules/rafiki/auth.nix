@@ -223,10 +223,10 @@ with k8s;
                                 inherit env;
 
                                 ports = [
-                                    { containerPort = 3006; name = "auth" }
-                                    { containerPort = 3003; name = "admin" }
-                                    { containerPort = 3007; name = "introspection" }
-                                    { containerPort = 3009; name = "interaction" }
+                                    { containerPort = 3006; name = "auth"; }
+                                    { containerPort = 3003; name = "admin"; }
+                                    { containerPort = 3007; name = "introspection"; }
+                                    { containerPort = 3009; name = "interaction"; }
                                 ];
 
                                 resources = {
@@ -240,7 +240,7 @@ with k8s;
                                     };
                                 };
                             };
-                        }
+                        };
                     };
                 };
 
