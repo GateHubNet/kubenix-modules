@@ -57,5 +57,8 @@
   ./ghost.nix
   ./projectsend.nix
   ./ory/hydra.nix
+  ./rafiki/auth.nix
+  ./rafiki/backend.nix
+  ./rafiki/frontend.nix
   ./jaeger/jaeger.nix
 ] ++ import ./prometheus/module-list.nix
