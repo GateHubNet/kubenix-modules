@@ -70,11 +70,17 @@ with k8s;
                 description = "Docker image to user";
                 type = types.str;
             };
-            
+
             replicas = mkOption {
                 description = "Number of Rafiki replicas to run";
                 type = types.int;
                 default = 1;
+            };
+
+            instance-kind = mkOption {
+                type = types.str;
+                description = "Node selector";
+                default = config.gatehub.instance-kind;
             };
 
             slippage = mkOption {
