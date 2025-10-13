@@ -258,7 +258,7 @@ with k8s;
                             { name = "admin"; port = 3003; targetPort = 3003; }
                             { name = "introspection"; port = 3007; targetPort = 3007; }
                             { name = "interaction"; port = 3009; targetPort = 3009; }
-                        ]
+                        ];
                     };
                 };
             };
