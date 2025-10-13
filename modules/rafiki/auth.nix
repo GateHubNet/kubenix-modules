@@ -21,7 +21,6 @@ with k8s;
         INTERACTION_COOKIE_SAME_SITE.value = config.interactionCookieSameSite;
         INTERACTION_PORT.value = config.ports.interaction;
         INTROSPECTION_PORT.value = config.ports.introspection;
-        PORT.value = config.ports.server;
         QUOTE_INTERACTION.value = config.incomingPaymentInteraction;
         WAIT_SECONDS.value = config.waitSeconds;
 
@@ -47,25 +46,25 @@ with k8s;
             };
 
             incomingPaymentInteraction = mkOption {
-                description = "";
+                description = "When true, incoming Open Payments grant requests are interactive";
                 type = types.bool;
                 default = false;
             };
 
             interactionCookieSameSite = mkOption {
-                description = "";
+                description = "Cookie setting for interaction";
                 type = types.str;
                 default = "none";
             };
 
             waitSeconds = mkOption {
-                description = "";
+                description = "The wait time, in seconds, included in a grant request response (grant.continue).";
                 type = types.int;
                 default = 2;
             };
 
             databaseCleanupWorkers = mkOption {
-                description = "";
+                description = "The number of workers processing expired or revoked access tokens.";
                 type = types.int;
                 default = 1;
             };
@@ -130,13 +129,13 @@ with k8s;
 
             accessToken = {
                 deletionDays = mkOption {
-                    description = "";
+                    description = "The days until expired and/or revoked access tokens are deleted.";
                     type = types.str;
                     default = "30";
                 };
 
                 expirySeconds = mkOption {
-                    description = "";
+                    description = "The expiry time, in seconds, for access tokens.";
                     type = types.str;
                     default = "600";
                 };
@@ -144,19 +143,19 @@ with k8s;
 
             urls = {
                 authServerDomain = mkOption {
-                    description = "";
+                    description = "Internal URL for ";
                     type = types.str;
                     default = "http://rafiki-auth.interledger:3006";
                 };
 
                 auth = mkOption {
-                    description = "";
+                    description = "The public endpoint for your Rafiki instance’s public Open Payments routes.";
                     type = types.str;
                     default = "https://rafiki.${config.gatehub.externalDomain}";
                 };
 
                 idp = mkOption {
-                    description = "";
+                    description = "The URL of your IdP’s server, used by the authorization server to inform an Open Payments client of where to redirect the end-user to start interactions.";
                     type = types.str;
                     default = "https://wallet.${config.gatehub.externalDomain}/interledger-consent";
                 };
@@ -164,33 +163,27 @@ with k8s;
 
             ports = {
                 auth = mkOption {
-                    description = "";
+                    description = "The port of your Open Payments authorization server.";
                     type = types.int;
                     default = 3006;
                 };
 
                 admin = mkOption {
-                    description = "";
+                    description = "The port of your Rafiki Auth Admin API server.";
                     type = types.int;
                     default = 3003;
                 };
 
                 interaction = mkOption {
-                    description = "";
+                    description = "The port number of your Open Payments interaction-related APIs.";
                     type = types.int;
                     default = 3009;
                 };
 
                 introspection = mkOption {
-                    description = "";
+                    description = "The port of your Open Payments access token introspection server.";
                     type = types.int;
                     default = 3007;
-                };
-
-                server = mkOption {
-                    description = "";
-                    type = types.int;
-                    default = 3006;
                 };
             };
         };

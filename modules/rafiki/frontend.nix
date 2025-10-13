@@ -23,25 +23,25 @@ with k8s;
             };
 
             authEnabled = mkOption {
-                description = "";
+                description = "When true, only authenticated users can be granted access to Rafiki Admin by an administrator";
                 type = types.bool;
                 default = false;
             };
 
             graphqlUrl = mkOption {
-                description = "";
+                description = "URL for Rafiki’s GraphQL Auth Admin API";
                 type = types.str;
                 default = "http://rafiki-backend.interledger:3001/graphql";
             };
 
             openPaymentsUrl = mkOption {
-                description = "";
+                description = "Your Open Payments API endpoint";
                 type = types.str;
                 default = "https://ilp.${config.gatehub.externalDomain}";
             };
 
             port = mkOption {
-                description = "";
+                description = "Port from which to host the Rafiki Remix app";
                 type = types.int;
                 default = 3010;
             };
