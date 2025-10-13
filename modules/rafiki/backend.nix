@@ -220,7 +220,7 @@ with k8s;
                     description = "The number of workers processing webhook events.";
                     type = types.int;
                     default = 1;
-                }
+                };
             };
 
             outgoingPayment = {
