@@ -66,6 +66,11 @@ with k8s;
     };
     in {
         options = {
+            image = mkOption  {
+                description = "Docker image to user";
+                type = types.str;
+            };
+            
             replicas = mkOption {
                 description = "Number of Rafiki replicas to run";
                 type = types.int;
@@ -378,7 +383,7 @@ with k8s;
                             { name = "admin"; port = 3001; targetPort = 3001; }
                             { name = "connector"; port = 3002; targetPort = 3002; }
                             { name = "open-payments"; port = 80; targetPort = 8080; }
-                        ]
+                        ];
                     };
                 };
             };
