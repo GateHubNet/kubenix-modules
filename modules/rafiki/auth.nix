@@ -24,15 +24,9 @@ with k8s;
         QUOTE_INTERACTION.value = config.incomingPaymentInteraction;
         WAIT_SECONDS.value = config.waitSeconds;
 
-        COOKIE_KEY = secretToEnv {
-            name = "secret-service-${name}-main";
-            key = "cookieKey";
-        };
+        COOKIE_KEY = secretToEnv config.cookieKey;
 
-        IDENTITY_SERVER_SECRET = secretToEnv {
-            name = "secret-service-${name}-main";
-            key = "identityServerSecret";
-        };
+        IDENTITY_SERVER_SECRET = secretToEnv config.identityServerSecret;
 
         REDIS_URL.value = "redis://:${config.redis.password}@${config.redis.host}:${config.redis.port}";
         AUTH_DATABASE_URL.value = "postgresql://${config.database.user}:${config.database.password}@${config.database.host}:${config.database.port}/${config.database.name}";
@@ -43,11 +37,21 @@ with k8s;
                 description = "Docker image to user";
                 type = types.str;
             };
-            
+
             replicas = mkOption {
                 description = "Number of Rafiki replicas to run";
                 type = types.int;
                 default = 1;
+            };
+
+            cookieKey = mkSecretOption {
+                description = "The koa KeyGrip key that is used to sign cookies for an interaction session.";
+                default.key = "cookieKey";
+            };
+
+            identityServerSecret = mkSecretOption {
+                description = "A shared secret between the authorization server and the IdP server; the authorization server will use the secret to secure its IdP-related endpoints. When the IdP server sends requests to the authorization server, the IdP server must provide the secret via an x-idp-secret header.";
+                default.key = "identityServerSecret";
             };
 
             incomingPaymentInteraction = mkOption {
@@ -77,10 +81,7 @@ with k8s;
             redis = {
                 password = mkSecretOption {
                     description = "Name of the Redis password";
-                    default = {
-                        name = "secret-service-${name}-redis-main";
-                        key = "password";
-                    };
+                    default.key = "password";
                 };
 
                 host = mkOption {
@@ -105,18 +106,12 @@ with k8s;
 
                 user = mkSecretOption {
                     description = "Name of the PostgreSQL user";
-                    default = {
-                        name = "secret-service-${name}-postgresql-main";
-                        key = "username";
-                    };
+                    default.key = "username";
                 };
 
                 password = mkSecretOption {
                     description = "Name of the PostgreSQL password";
-                    default = {
-                        name = "secret-service-${name}-postgresql-main";
-                        key = "password";
-                    };
+                    default.key = "password";
                 };
 
                 host = mkOption {
@@ -265,42 +260,6 @@ with k8s;
                             { name = "interaction"; port = 3009; targetPort = 3009; }
                         ];
                     };
-                };
-            };
-
-            kubernetes.customResources.secret-claims.main = {
-                metadata = {
-                    name = "secret-service-${name}-main";
-                    labels.app = "secret-service-${name}-main";
-                };
-
-                spec = {
-                    type = "Opaque";
-                    path = "secret/service/${name}/main";
-                };
-            };
-
-            kubernetes.customResources.secret-claims.postgresql = {
-                metadata = {
-                    name = "secret-service-${name}-postgresql-main";
-                    labels.app = "secret-service-${name}-postgresql-main";
-                };
-
-                spec = {
-                    type = "Opaque";
-                    path = "secret/service/${name}/postgresql/main";
-                };
-            };
-
-            kubernetes.customResources.secret-claims.redis = {
-                metadata = {
-                    name = "secret-service-${name}-redis-main";
-                    labels.app = "secret-service-${name}-redis-main";
-                };
-
-                spec = {
-                    type = "Opaque";
-                    path = "secret/service/${name}/redis/main";
                 };
             };
         };
