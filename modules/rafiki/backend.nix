@@ -73,7 +73,7 @@ with k8s;
 
             redisUrl = mkSecretOption {
                 description = "The connection URL for Redis.";
-                default.key = "redisUrl"
+                default.key = "redisUrl";
             };
 
             databaseUrl = mkSecretOption {
@@ -155,8 +155,8 @@ with k8s;
             tigerbeetle = {
                 enable = mkOption {
                     description = "When true, a TigerBeetle database is used for accounting. When false, a Postgres database is used.";
-                    type = types.bool;
-                    default = false;
+                    type = types.str;
+                    default = "false";
                 };
             };
 
