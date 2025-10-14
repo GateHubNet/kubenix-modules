@@ -83,6 +83,16 @@ with k8s;
                 default = config.gatehub.instance-kind;
             };
 
+            signatureSecret = mkSecretOption {
+                description = "The secret to generate request header signatures for webhook event requests.";
+                default.key = "signatureSecret";
+            };
+
+            streamSecret = mkSecretOption {
+                description = "The seed secret to generate shared STREAM secrets.";
+                default.key = "streamSecret";
+            };
+
             slippage = mkOption {
                 description = "The accepted ILP rate fluctuation.";
                 type = types.str;
@@ -391,42 +401,6 @@ with k8s;
                             { name = "open-payments"; port = 80; targetPort = 8080; }
                         ];
                     };
-                };
-            };
-
-            kubernetes.customResources.secret-claims.main = {
-                metadata = {
-                    name = "secret-service-${name}-main";
-                    labels.app = "secret-service-${name}-main";
-                };
-
-                spec = {
-                    type = "Opaque";
-                    path = "secret/service/${name}/main";
-                };
-            };
-
-            kubernetes.customResources.secret-claims.postgresql = {
-                metadata = {
-                    name = "secret-service-${name}-postgresql-main";
-                    labels.app = "secret-service-${name}-postgresql-main";
-                };
-
-                spec = {
-                    type = "Opaque";
-                    path = "secret/service/${name}/postgresql/main";
-                };
-            };
-
-            kubernetes.customResources.secret-claims.redis = {
-                metadata = {
-                    name = "secret-service-${name}-redis-main";
-                    labels.app = "secret-service-${name}-redis-main";
-                };
-
-                spec = {
-                    type = "Opaque";
-                    path = "secret/service/${name}/redis/main";
                 };
             };
         };
