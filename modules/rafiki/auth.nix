@@ -44,18 +44,6 @@ with k8s;
                 default = "1";
             };
 
-            instance-kind = mkOption {
-                type = types.str;
-                description = "Node selector";
-                default = config.gatehub.instance-kind;
-            };
-
-            instance-kind = mkOption {
-                type = types.str;
-                description = "Node selector";
-                default = config.gatehub.instance-kind;
-            };
-
             cookieKey = mkSecretOption {
                 description = "The koa KeyGrip key that is used to sign cookies for an interaction session.";
                 default.key = "cookieKey";
@@ -214,7 +202,7 @@ with k8s;
                         template.metadata.labels.app = name;
 
                         template.spec = {
-                            nodeSelector.instance-kind = config.instance-kind;
+                            nodeSelector.instance-kind = config.gatehub.instance-kind;
 
                             initContainers = [
                                 {

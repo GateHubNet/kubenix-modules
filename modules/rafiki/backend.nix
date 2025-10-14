@@ -77,12 +77,6 @@ with k8s;
                 default = 1;
             };
 
-            instance-kind = mkOption {
-                type = types.str;
-                description = "Node selector";
-                default = config.gatehub.instance-kind;
-            };
-
             signatureSecret = mkSecretOption {
                 description = "The secret to generate request header signatures for webhook event requests.";
                 default.key = "signatureSecret";
@@ -345,7 +339,7 @@ with k8s;
                         template.metadata.labels.app = name;
 
                         template.spec = {
-                            nodeSelector.instance-kind = config.instance-kind;
+                            nodeSelector.instance-kind = config.gatehub.instance-kind;
 
                             initContainers = [
                                 {
