@@ -27,12 +27,6 @@ with k8s;
                 default = "1";
             };
 
-            instance-kind = mkOption {
-                type = types.str;
-                description = "Node selector";
-                default = config.gatehub.instance-kind;
-            };
-
             authEnabled = mkOption {
                 description = "When true, only authenticated users can be granted access to Rafiki Admin by an administrator";
                 type = types.str;
@@ -72,7 +66,7 @@ with k8s;
                         template.metadata.labels.app = name;
 
                         template.spec = {
-                            nodeSelector.instance-kind = config.instance-kind;
+                            nodeSelector.instance-kind = config.gatehub.instance-kind;
 
                             containers.server = {
                                 image = config.image;
