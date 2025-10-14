@@ -23,8 +23,8 @@ with k8s;
 
             replicas = mkOption {
                 description = "Number of Rafiki replicas to run";
-                type = types.str;
-                default = "1";
+                type = types.int;
+                default = 1;
             };
 
             authEnabled = mkOption {
