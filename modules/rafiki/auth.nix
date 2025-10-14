@@ -27,9 +27,8 @@ with k8s;
         COOKIE_KEY = secretToEnv config.cookieKey;
 
         IDENTITY_SERVER_SECRET = secretToEnv config.identityServerSecret;
-
-        REDIS_URL.value = "redis://:${config.redis.password}@${config.redis.host}:${config.redis.port}";
-        AUTH_DATABASE_URL.value = "postgresql://${config.database.user}:${config.database.password}@${config.database.host}:${config.database.port}/${config.database.name}";
+        REDIS_URL = secretToEnv config.redisUrl;
+        AUTH_DATABASE_URL = secretToEnv config.databaseUrl;
     };
     in {
         options = {
@@ -52,6 +51,16 @@ with k8s;
             identityServerSecret = mkSecretOption {
                 description = "A shared secret between the authorization server and the IdP server; the authorization server will use the secret to secure its IdP-related endpoints. When the IdP server sends requests to the authorization server, the IdP server must provide the secret via an x-idp-secret header.";
                 default.key = "identityServerSecret";
+            };
+
+            redisUrl = mkSecretOption {
+                description = "The connection URL for Redis.";
+                default.key = "redisUrl"
+            };
+
+            databaseUrl = mkSecretOption {
+                description = "The connection URL for Database";
+                default.key = "databaseUrl";
             };
 
             incomingPaymentInteraction = mkOption {
