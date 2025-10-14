@@ -220,8 +220,9 @@ with k8s;
 
                                     image = config.image;
                                     imagePullPolicy = config.gatehub.imagePullPolicy;
+                                    workingDir = "/home/rafiki/packages/auth/";
 
-                                    command = ["pnpm" "run" "knex" "--" "migrate:latest" "--env" "production"];
+                                    command = ["npm" "run" "knex" "--" "migrate:latest" "--env" "production"];
                                 }
                             ];
 
