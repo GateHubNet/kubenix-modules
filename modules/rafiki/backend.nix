@@ -102,16 +102,16 @@ with k8s;
             signature = {
                 version = mkOption {
                     description = "The version number to generate request header signatures for webhook events.";
-                    type = types.int;
-                    default = 1;
+                    type = types.str;
+                    default = "1";
                 };
             };
 
             quote = {
                 lifespan = mkOption {
                     description = "The time, in milliseconds, an Open Payments quote is valid for.";
-                    type = types.int;
-                    default = 300000;
+                    type = types.str;
+                    default = "300000";
                 };
             };
 
@@ -143,14 +143,14 @@ with k8s;
 
                 workers = mkOption {
                     description = "The number of workers processing wallet address requests.";
-                    type = types.int;
-                    default = 1;
+                    type = types.str;
+                    default = "1";
                 };
 
                 workerIdle = mkOption {
                     description = "The time, in milliseconds, that WALLET_ADDRESS_WORKERS wait until checking the empty wallet address request queue again.";
-                    type = types.int;
-                    default = 200;
+                    type = types.str;
+                    default = "200";
                 };
             };
 
@@ -165,8 +165,8 @@ with k8s;
             graphql = {
                 keyLockMs = mkOption {
                     description = "The TTL, in milliseconds, for idempotencyKey concurrency lock on GraphQL mutations on the Backend Admin API.";
-                    type = types.int;
-                    default = 2000;
+                    type = types.str;
+                    default = "2000";
                 };
             };
 
@@ -179,8 +179,8 @@ with k8s;
 
                 lifetime = mkOption {
                     description = "The time, in milliseconds, the exchange rates you provide via the EXCHANGE_RATES_URL are valid.";
-                    type = types.int;
-                    default = 15000;
+                    type = types.str;
+                    default = "15000";
                 };
             };
 
@@ -201,28 +201,28 @@ with k8s;
             ports = {
                 admin = mkOption {
                     description = "The port of your Backend Admin API server.";
-                    type = types.int;
-                    default = 3001;
+                    type = types.str;
+                    default = "3001";
                 };
 
                 connector = mkOption {
                     description = "The port of the ILP connector for sending packets via ILP over HTTP.";
-                    type = types.int;
-                    default = 3002;
+                    type = types.str;
+                    default = "3002";
                 };
 
                 openPayments = mkOption {
                     description = "The port of your Open Payments resource server.";
-                    type = types.int;
-                    default = 8080;
+                    type = types.str;
+                    default = "3002";
                 };
             };
 
             webhooks = {
                 timeout = mkOption {
                     description = "The time, in milliseconds, that your Rafiki instance will wait for a 200 response from your webhook endpoint. If a 200 response is not received, Rafiki will time out and try to send the webhook event again.";
-                    type = types.int;
-                    default = 200;
+                    type = types.str;
+                    default = "200";
                 };
 
                 url = mkOption {
@@ -233,42 +233,42 @@ with k8s;
 
                 idle = mkOption {
                     description = "The time, in milliseconds, that WEBHOOK_WORKERS will wait until they check the empty webhook event queue again.";
-                    type = types.int;
-                    default = 200;
+                    type = types.str;
+                    default = "200";
                 };
 
                 workers = mkOption {
                     description = "The number of workers processing webhook events.";
-                    type = types.int;
-                    default = 1;
+                    type = types.str;
+                    default = "1";
                 };
             };
 
             outgoingPayment = {
                 idle = mkOption {
                     description = "The time, in milliseconds, that OUTGOING_PAYMENT_WORKERS wait until they check an empty outgoing payment request queue again.";
-                    type = types.int;
-                    default = 200;
+                    type = types.str;
+                    default = "200";
                 };
 
                 workers = mkOption {
                     description = "The number of workers processing outgoing payment requests.";
-                    type = types.int;
-                    default = 4;
+                    type = types.str;
+                    default = "4";
                 };
             };
 
             incomingPayment = {
                 workerIdle = mkOption {
                     description = "The time, in milliseconds, that INCOMING_PAYMENT_WORKERS will wait until checking an empty incoming payment request queue again.";
-                    type = types.int;
-                    default = 200;
+                    type = types.str;
+                    default = "200";
                 };
 
                 workers = mkOption {
                     description = "The number of workers processing incoming payment requests.";
-                    type = types.int;
-                    default = 1;
+                    type = types.str;
+                    default = "1";
                 };
             };
 
