@@ -13,9 +13,6 @@ with k8s;
         INSTANCE_NAME.value = "gatehub-rafiki-${config.gatehub.cluster}";
         KEY_ID.value = "gh";
 
-        REDIS_URL.value = "redis://:${config.redis.password}@${config.redis.host}:${config.redis.port}";
-        DATABASE_URL.value = "postgresql://${config.database.user}:${config.database.password}@${config.database.host}:${config.database.port}/${config.database.name}";
-
         INCOMING_PAYMENT_WORKER_IDLE.value = config.incomingPayment.workerIdle;
         INCOMING_PAYMENT_WORKERS.value = config.incomingPayment.workers;
 
@@ -44,8 +41,6 @@ with k8s;
         WALLET_ADDRESS_URL.value = config.walletAddress.url;
         WALLET_ADDRESS_WORKERS.value = config.walletAddress.workers;
         OPEN_PAYMENTS_URL.value = config.walletAddress.openPaymentsUrl;
-        WALLET_ADDRESS_WORKER_IDLE.value = config.walletAddress.workerIdle;
-
         ILP_ADDRESS.value = config.ilp.address; #TODO: add to services "g.gatehub" and test.gatehub;
         ILP_CONNECTOR_URL.value = config.ilp.connectorUrl;
 
@@ -54,15 +49,14 @@ with k8s;
         SIGNATURE_VERSION.value = config.signature.version;
         SLIPPAGE.value = config.slippage;
 
-        SIGNATURE_SECRET = secretToEnv {
-            name = "secret-service-${name}-main";
-            key = "signatureSecret";
-        };
 
-        STREAM_SECRET = secretToEnv {
-            name = "secret-service-${name}-main";
-            key = "streamSecret";
-        };
+        
+        WALLET_ADDRESS_WORKER_IDLE.value = config.walletAddress.workerIdle;
+
+        REDIS_URL = secretToEnv config.redisUrl;
+        DATABASE_URL = secretToEnv config.databaseUrl;
+        STREAM_SECRET = secretToEnv config.streamSecret; 
+        SIGNATURE_SECRET = secretToEnv config.signatureSecret;
     };
     in {
         options = {
@@ -75,6 +69,16 @@ with k8s;
                 description = "Number of Rafiki replicas to run";
                 type = types.int;
                 default = 1;
+            };
+
+            redisUrl = mkSecretOption {
+                description = "The connection URL for Redis.";
+                default.key = "redisUrl"
+            };
+
+            databaseUrl = mkSecretOption {
+                description = "The connection URL for Database";
+                default.key = "databaseUrl";
             };
 
             signatureSecret = mkSecretOption {
