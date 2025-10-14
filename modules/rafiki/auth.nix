@@ -40,8 +40,14 @@ with k8s;
 
             replicas = mkOption {
                 description = "Number of Rafiki replicas to run";
-                type = types.int;
-                default = 1;
+                type = types.str;
+                default = "1";
+            };
+
+            instance-kind = mkOption {
+                type = types.str;
+                description = "Node selector";
+                default = config.gatehub.instance-kind;
             };
 
             instance-kind = mkOption {
@@ -62,8 +68,8 @@ with k8s;
 
             incomingPaymentInteraction = mkOption {
                 description = "When true, incoming Open Payments grant requests are interactive";
-                type = types.bool;
-                default = false;
+                type = types.str;
+                default = "false";
             };
 
             interactionCookieSameSite = mkOption {
@@ -74,14 +80,14 @@ with k8s;
 
             waitSeconds = mkOption {
                 description = "The wait time, in seconds, included in a grant request response (grant.continue).";
-                type = types.int;
-                default = 2;
+                type = types.str;
+                default = "2";
             };
 
             databaseCleanupWorkers = mkOption {
                 description = "The number of workers processing expired or revoked access tokens.";
-                type = types.int;
-                default = 1;
+                type = types.str;
+                default = "1";
             };
 
             redis = {
@@ -170,26 +176,26 @@ with k8s;
             ports = {
                 auth = mkOption {
                     description = "The port of your Open Payments authorization server.";
-                    type = types.int;
-                    default = 3006;
+                    type = types.str;
+                    default = "3006";
                 };
 
                 admin = mkOption {
                     description = "The port of your Rafiki Auth Admin API server.";
-                    type = types.int;
-                    default = 3003;
+                    type = types.str;
+                    default = "3003";
                 };
 
                 interaction = mkOption {
                     description = "The port number of your Open Payments interaction-related APIs.";
-                    type = types.int;
-                    default = 3009;
+                    type = types.str;
+                    default = "3009";
                 };
 
                 introspection = mkOption {
                     description = "The port of your Open Payments access token introspection server.";
-                    type = types.int;
-                    default = 3007;
+                    type = types.str;
+                    default = "3007";
                 };
             };
         };

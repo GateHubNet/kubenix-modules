@@ -23,8 +23,14 @@ with k8s;
 
             replicas = mkOption {
                 description = "Number of Rafiki replicas to run";
-                type = types.int;
-                default = 1;
+                type = types.str;
+                default = "1";
+            };
+
+            instance-kind = mkOption {
+                type = types.str;
+                description = "Node selector";
+                default = config.gatehub.instance-kind;
             };
 
             instance-kind = mkOption {
@@ -35,8 +41,8 @@ with k8s;
 
             authEnabled = mkOption {
                 description = "When true, only authenticated users can be granted access to Rafiki Admin by an administrator";
-                type = types.bool;
-                default = false;
+                type = types.str;
+                default = "false";
             };
 
             graphqlUrl = mkOption {
@@ -53,8 +59,8 @@ with k8s;
 
             port = mkOption {
                 description = "Port from which to host the Rafiki Remix app";
-                type = types.int;
-                default = 3010;
+                type = types.str;
+                default = "3010";
             };
         };
 
