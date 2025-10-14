@@ -55,7 +55,7 @@ with k8s;
 
             redisUrl = mkSecretOption {
                 description = "The connection URL for Redis.";
-                default.key = "redisUrl"
+                default.key = "redisUrl";
             };
 
             databaseUrl = mkSecretOption {
