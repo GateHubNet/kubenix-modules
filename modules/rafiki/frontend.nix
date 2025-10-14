@@ -85,7 +85,7 @@ with k8s;
                                     };
                                     limits = {
                                         cpu = "500m";
-                                        mempry = "1000Mi";
+                                        memory = "1000Mi";
                                     };
                                 };
                             };
