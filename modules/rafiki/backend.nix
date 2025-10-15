@@ -212,7 +212,7 @@ with k8s;
                 openPayments = mkOption {
                     description = "The port of your Open Payments resource server.";
                     type = types.str;
-                    default = "3002";
+                    default = "8080";
                 };
             };
 
