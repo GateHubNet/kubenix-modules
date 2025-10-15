@@ -92,6 +92,21 @@ with k8s;
                         };
                     };
                 };
+
+                services.rafiki-frontend = {
+                    metadata = {
+                        name = name;
+                        labels.app = name;
+                    };
+
+                    spec = {
+                        selector.app = name;
+
+                        ports = [
+                            { name = "http"; port = 3010; targetPort = 3010; }
+                        ];
+                    };
+                };
             };
         };
     };
