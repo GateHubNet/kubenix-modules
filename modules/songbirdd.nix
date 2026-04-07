@@ -4,7 +4,14 @@ with k8s;
 with lib;
 
 {
-  config.kubernetes.moduleDefinitions.songbirdd.module = {config, module, ...}: {
+  config.kubernetes.moduleDefinitions.songbirdd.module = {config, module, ...}: let
+    songbirddConfig = ''
+{
+  "pruning-enabled": true,
+  "log-level": "info"
+}
+    '';
+  in {
     options = {
       image = mkOption {
         description = "Name of the songbirdd image to use";
@@ -31,12 +38,6 @@ with lib;
         };
       };
     };
-    songbirddConfig = ''
-{
-  "pruning-enabled": true,
-  "log-level": "info"
-}
-    '';
 
     config = {
       kubernetes.resources.statefulSets.songbirdd = {
