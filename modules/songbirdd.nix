@@ -31,6 +31,12 @@ with lib;
         };
       };
     };
+    songbirddConfig = ''
+{
+  "pruning-enabled": true,
+  "log-level": "info"
+}
+    '';
 
     config = {
       kubernetes.resources.statefulSets.songbirdd = {
@@ -122,6 +128,11 @@ with lib;
         metadata.labels.app = module.name;
         spec.maxUnavailable = 1;
         spec.selector.matchLabels.app = module.name;
+      };
+
+      kubernetes.resources.configMaps.songbirdd = {
+        metadata.name = "${module.name}-config";
+        data."config.json" = songbirddConfig;
       };
     };
   };
