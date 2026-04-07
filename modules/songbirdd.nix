@@ -98,7 +98,13 @@ with lib;
                   failureThreshold = 3;
                   successThreshold = 1;
                 };
+
+                volumeMounts = [{
+                  name = "config";
+                  mountPath = "/app/conf/C";
+                }];
               };
+              volumes.config.configMap.name = "${module.name}-config";
             };
           };
           volumeClaimTemplates = [{
