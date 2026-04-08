@@ -60,7 +60,7 @@ with lib;
                   mountPath = "/app/db/";
                 }{
                   name = "config";
-                  mountPath = "/app/conf/";
+                  mountPath = "/app/conf/C";
                 }];
 
                 resources.requests = {
